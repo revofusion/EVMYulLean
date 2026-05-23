@@ -16,7 +16,7 @@ def blobECDSARECOVER (e v r s : String) : String :=
   }
 
 def blobSign (e pᵣ : String) : List String :=
-  (String.split · Char.isWhitespace) ∘ totallySafePerformIO ∘ IO.Process.run <|
+  ((String.split · Char.isWhitespace) ∘ String.Slice.toString) ∘ totallySafePerformIO ∘ IO.Process.run <|
     pythonCommandOfInput e pᵣ
   where pythonCommandOfInput (e pᵣ : String) : IO.Process.SpawnArgs := {
     cmd := "python3",

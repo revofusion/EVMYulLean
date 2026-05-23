@@ -22,7 +22,7 @@ instance : NeZero UInt256.size where
 
 structure UInt256 where
   val : Fin UInt256.size
-  deriving BEq, Ord
+  deriving BEq
 
 instance : ToString UInt256 where
   toString a := toString a.val
@@ -33,6 +33,37 @@ def ofNat (n : ℕ) : UInt256 := Id.run do
   ⟨Fin.ofNat _ n⟩
 
 def toNat (u : UInt256) : ℕ := u.val.val
+
+instance instOrdUInt256 : Ord UInt256 where
+  compare a b := compare a.val b.val
+
+instance : Std.ReflOrd UInt256 where
+  compare_self := by
+    rintro ⟨a⟩
+    simpa [Ord.compare] using (Std.ReflCmp.compare_self (cmp := compare) (a := a))
+
+instance : Std.OrientedOrd UInt256 where
+  eq_swap := by
+    rintro ⟨a⟩ ⟨b⟩
+    simpa [Ord.compare] using (Std.OrientedCmp.eq_swap (cmp := compare) (a := a) (b := b))
+
+instance : Std.TransOrd UInt256 where
+  isLE_trans := by
+    rintro ⟨a⟩ ⟨b⟩ ⟨c⟩ hab hbc
+    simpa [Ord.compare] using (Std.TransCmp.isLE_trans (cmp := compare) (a := a) (b := b) (c := c) hab hbc)
+
+instance : Std.LawfulEqOrd UInt256 where
+  eq_of_compare := by
+    rintro ⟨a⟩ ⟨b⟩ h
+    have hab : a = b := Std.LawfulEqCmp.eq_of_compare (cmp := compare) (a := a) (b := b) (by simpa [Ord.compare] using h)
+    cases hab
+    rfl
+
+instance : Std.LawfulBEqOrd UInt256 where
+  compare_eq_iff_beq := by
+    rintro ⟨a⟩ ⟨b⟩
+    change compare a b = .eq ↔ (a == b) = true
+    exact Std.LawfulBEqCmp.compare_eq_iff_beq (cmp := compare) (a := a) (b := b)
 
 instance : Repr UInt256 where
   reprPrec n _ := repr n.toNat
@@ -132,7 +163,7 @@ def pow (b : UInt256) (n : UInt256) := powAux ⟨1⟩ b n.1
 instance : HPow UInt256 UInt256 UInt256 := ⟨pow⟩
 instance : AndOp UInt256 := ⟨UInt256.land⟩
 instance : OrOp UInt256 := ⟨UInt256.lor⟩
-instance : Xor UInt256 := ⟨UInt256.xor⟩
+instance : XorOp UInt256 := ⟨UInt256.xor⟩
 instance : ShiftLeft UInt256 := ⟨UInt256.shiftLeft⟩
 instance : ShiftRight UInt256 := ⟨UInt256.shiftRight⟩
 

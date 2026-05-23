@@ -135,4 +135,4 @@ def main (args : List String) : IO UInt32 := do
                           (phase := 3)
                           (threads := NumThreads) >>= printResults
 
-  return if (Std.HashSet.ofArray (failed₁ ++ failed₂ ++ failed₃) |>.diff ExpectedToFail).isEmpty then 0 else 1
+  return if Std.HashSet.diffCompat (Std.HashSet.ofArray (failed₁ ++ failed₂ ++ failed₃)) ExpectedToFail |>.isEmpty then 0 else 1
