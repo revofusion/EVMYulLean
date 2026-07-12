@@ -524,7 +524,7 @@ def X (fuel : ℕ) (validJumps : Array UInt256) (evmState : State)
 -/
 def Ξ -- Type `Ξ` using `\GX` or `\Xi`
   (fuel : ℕ)
-  (createdAccounts : Batteries.RBSet AccountAddress compare)
+  (createdAccounts : RBSet AccountAddress compare)
   (genesisBlockHeader : BlockHeader)
   (blocks : ProcessedBlocks)
   (σ : AccountMap .EVM)
@@ -535,7 +535,7 @@ def Ξ -- Type `Ξ` using `\GX` or `\Xi`
     :
   Except
     EVM.ExecutionException
-    (ExecutionResult (Batteries.RBSet AccountAddress compare × AccountMap .EVM × UInt256 × Substate))
+    (ExecutionResult (RBSet AccountAddress compare × AccountMap .EVM × UInt256 × Substate))
 := do
   match fuel with
     | 0 => .error .OutOfFuel
@@ -562,7 +562,7 @@ def Ξ -- Type `Ξ` using `\GX` or `\Xi`
 def Lambda
   (fuel : ℕ)
   (blobVersionedHashes : List ByteArray)
-  (createdAccounts : Batteries.RBSet AccountAddress compare) -- needed for EIP-6780
+  (createdAccounts : RBSet AccountAddress compare) -- needed for EIP-6780
   (genesisBlockHeader : BlockHeader)
   (blocks : ProcessedBlocks)
   (σ : AccountMap .EVM)
@@ -581,7 +581,7 @@ def Lambda
   :
   Except EVM.ExecutionException
     ( AccountAddress
-    × Batteries.RBSet AccountAddress compare
+    × RBSet AccountAddress compare
     × AccountMap .EVM
     × UInt256
     × Substate
@@ -716,7 +716,7 @@ NB - This is implemented using the 'boolean' fragment with ==, <=, ||, etc.
 -/
 def Θ (fuel : Nat)
       (blobVersionedHashes : List ByteArray)
-      (createdAccounts : Batteries.RBSet AccountAddress compare)
+      (createdAccounts : RBSet AccountAddress compare)
       (genesisBlockHeader : BlockHeader)
       (blocks : ProcessedBlocks)
       (σ  : AccountMap .EVM)
@@ -735,7 +735,7 @@ def Θ (fuel : Nat)
       (H : BlockHeader)
       (w  : Bool)
         :
-      Except EVM.ExecutionException (Batteries.RBSet AccountAddress compare × AccountMap .EVM × UInt256 × Substate × Bool × ByteArray)
+      Except EVM.ExecutionException (RBSet AccountAddress compare × AccountMap .EVM × UInt256 × Substate × Bool × ByteArray)
 :=
   match fuel with
     | 0 => .error .OutOfFuel
@@ -866,7 +866,7 @@ def Υ (fuel : ℕ)
   let a := -- (80)
     A0.accessedAccounts.insert S_T
       |>.insert H.beneficiary
-      |>.union <| Batteries.RBSet.ofList (accessList.map Prod.fst) compare
+      |>.union <| RBSet.ofList (accessList.map Prod.fst) compare
   -- (81)
   let g := .ofNat <| T.base.gasLimit.toNat - g₀
   let AStarₐ := -- (79)
@@ -874,8 +874,8 @@ def Υ (fuel : ℕ)
       | some t => a.insert t
       | none => a
   let AStar := -- (77)
-    { A0 with accessedAccounts := AStarₐ, accessedStorageKeys := Batteries.RBSet.ofList AStar_K Substate.storageKeysCmp}
-  let createdAccounts : Batteries.RBSet AccountAddress compare := .empty
+    { A0 with accessedAccounts := AStarₐ, accessedStorageKeys := RBSet.ofList AStar_K Substate.storageKeysCmp}
+  let createdAccounts : RBSet AccountAddress compare := .empty
   let (/- provisional state -/ σ_P, g', A, z) ← -- (76)
     match T.base.recipient with
       | none => do
@@ -938,9 +938,9 @@ def Υ (fuel : ℕ)
     if beneficiaryFee != ⟨0⟩ then
       σStar.increaseBalance .EVM H.beneficiary beneficiaryFee
     else σStar
-  let σ' := A.selfDestructSet.1.foldl Batteries.RBMap.erase σStar' -- (87)
+  let σ' := A.selfDestructSet.1.foldl RBMap.erase σStar' -- (87)
   let deadAccounts := A.touchedAccounts.filter (State.dead σStar' ·)
-  let σ' := deadAccounts.foldl Batteries.RBMap.erase σ' -- (88)
+  let σ' := deadAccounts.foldl RBMap.erase σ' -- (88)
   let σ' := σ'.map λ (addr, acc) ↦ (addr, { acc with tstorage := .empty})
   .ok (σ', A, z, T.base.gasLimit - gStar)
 end EVM

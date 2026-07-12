@@ -128,8 +128,8 @@ theorem lookupStorage_updateStorage_of_ne_of_nonzero {τ} (acc : Account τ)
 theorem refinesScalar_updateStorage_same_of_nonzero {τ} {acc : Account τ} {slot value : UInt256}
     (hvalue : (value == default) = false) :
     StorageRefinesScalar (acc.updateStorage slot value).storage slot value := by
-  simpa [StorageRefinesScalar, storageRead] using
-    lookupStorage_updateStorage_same_of_nonzero acc slot value hvalue
+  simp [StorageRefinesScalar, Account.updateStorage, hvalue]
+  exact storageRead_insert_self acc.storage slot value
 
 theorem refinesScalar_updateStorage_of_ne_of_nonzero {τ} {acc : Account τ}
     {slot slot' value preserved : UInt256}
@@ -137,14 +137,14 @@ theorem refinesScalar_updateStorage_of_ne_of_nonzero {τ} {acc : Account τ}
     (hvalue : (value == default) = false)
     (hslot : slot' ≠ slot) :
     StorageRefinesScalar (acc.updateStorage slot value).storage slot' preserved := by
-  simpa [StorageRefinesScalar, storageRead] using
-    (lookupStorage_updateStorage_of_ne_of_nonzero acc slot slot' value hvalue hslot).trans href
+  simp [StorageRefinesScalar, Account.updateStorage, hvalue]
+  exact (storageRead_insert_of_ne acc.storage slot slot' value hslot).trans href
 
 theorem refinesMappingKey_updateStorage_same_of_nonzero {τ} {acc : Account τ}
     {baseSlot key value : UInt256}
     (hvalue : (value == default) = false) :
     StorageRefinesMappingKey (acc.updateStorage (mappingSlot key baseSlot) value).storage baseSlot key value := by
-  simpa [StorageRefinesMappingKey, mappingRead] using
+  simpa [StorageRefinesMappingKey, mappingRead, StorageRefinesScalar] using
     refinesScalar_updateStorage_same_of_nonzero (acc := acc) (slot := mappingSlot key baseSlot) (value := value) hvalue
 
 /--
@@ -177,7 +177,7 @@ theorem refinesMapping_updateStorage_of_nonzero
         (href := href other)
         hvalue
         hslot
-    simpa [StorageRefinesMapping, StorageRefinesMappingKey, mappingRead, Function.update, hother] using hpreserved
+    simpa [StorageRefinesMapping, StorageRefinesMappingKey, mappingRead, StorageRefinesScalar, Function.update, hother] using hpreserved
 
 section Examples
 
