@@ -1,3 +1,5 @@
+import Std.Data.TreeSet.Basic
+
 import EvmYul.Maps.StorageMap
 import EvmYul.SpongeHash.Keccak256
 
@@ -12,8 +14,8 @@ namespace EvmYul
   Precompiled contract addresses.
   (142) `π ≡ {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}`
 -/
-def π : Batteries.RBSet AccountAddress compare :=
-  Batteries.RBSet.ofList ((List.range 11).tail.map (Fin.ofNat _)) compare
+def π : Std.TreeSet AccountAddress compare :=
+  Std.TreeSet.ofList ((List.range 11).tail.map (Fin.ofNat _)) compare
 
 inductive ToExecute (τ : OperationType) where
   | Code (code : Yul.Ast.contractCode τ)

@@ -8,8 +8,6 @@ import EvmYul.State.Substate
 
 namespace EvmYul
 
-open Batteries (RBMap RBSet)
-
 -- "All transaction types specify a number of common fields:"
 /--
 `BaseTransaction`. Section 4.3.

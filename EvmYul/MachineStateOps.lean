@@ -1,9 +1,3 @@
-import Batteries.Data.RBMap.Basic
-import Batteries.Data.RBMap.Depth
-import Batteries.Data.RBMap.Lemmas
-import Batteries.Data.RBMap.Alter
-import Batteries.Data.RBMap.WF
-
 import EvmYul.MachineState
 
 import EvmYul.SpongeHash.Keccak256
@@ -21,8 +15,6 @@ def writeBytes
   }
 
 namespace MachineState
-
-open Batteries (RBMap)
 
 -- Appendix H, (320)
 def M (s f l : ℕ) : ℕ :=

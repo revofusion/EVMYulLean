@@ -1,8 +1,5 @@
-import Batteries.Data.RBMap.Basic
-import Batteries.Data.RBMap.Depth
-import Batteries.Data.RBMap.Lemmas
-import Batteries.Data.RBMap.Alter
-import Batteries.Data.RBMap.WF
+import Std.Data.TreeSet.Basic
+import Std.Data.TreeSet.Lemmas
 import EvmYul.UInt256
 import EvmYul.Wheels
 import EvmYul.State.Account
@@ -51,11 +48,11 @@ The `Substate` `A`. Section 6.1.
 - `logSeries`          `Aₗ`
 -/
 structure Substate where
-  selfDestructSet     : Batteries.RBSet AccountAddress compare
-  touchedAccounts     : Batteries.RBSet AccountAddress compare
+  selfDestructSet     : Std.TreeSet AccountAddress compare
+  touchedAccounts     : Std.TreeSet AccountAddress compare
   refundBalance       : UInt256
-  accessedAccounts    : Batteries.RBSet AccountAddress compare
-  accessedStorageKeys : Batteries.RBSet (AccountAddress × UInt256) Substate.storageKeysCmp
+  accessedAccounts    : Std.TreeSet AccountAddress compare
+  accessedStorageKeys : Std.TreeSet (AccountAddress × UInt256) Substate.storageKeysCmp
   logSeries           : LogSeries
   deriving BEq, Inhabited, Repr
 

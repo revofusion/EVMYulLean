@@ -1,4 +1,4 @@
-import Batteries.Data.RBMap.Lemmas
+import Std.Data.TreeMap.Lemmas
 
 import EvmYul.FFI.ffi
 import EvmYul.State.AccountOps
@@ -22,7 +22,7 @@ def mappingSlot (key baseSlot : UInt256) : UInt256 :=
 Read a raw storage slot with Solidity's default-zero convention.
 -/
 def storageRead (storage : Storage) (slot : UInt256) : UInt256 :=
-  storage.findD slot default
+  storage.getD slot default
 
 /--
 Read a logical mapping entry from raw storage.
@@ -93,17 +93,15 @@ theorem sload_of_refinesMapping {τ} {self : State τ} {baseSlot : UInt256} {f :
 
 theorem storageRead_insert_self (storage : Storage) (slot value : UInt256) :
     storageRead (storage.insert slot value) slot = value := by
-  unfold storageRead Batteries.RBMap.findD
-  rw [Batteries.RBMap.find?_insert_of_eq (t := storage) (k := slot) (v := value) (k' := slot)]
-  · simp
-  · simp
+  unfold storageRead
+  rw [Std.TreeMap.getD_insert_self]
 
 theorem storageRead_insert_of_ne (storage : Storage) (slot slot' value : UInt256) (hslot : slot' ≠ slot) :
     storageRead (storage.insert slot value) slot' = storageRead storage slot' := by
-  have hcmp : compare slot' slot ≠ .eq := by
-    simpa [compare_eq_iff_eq] using hslot
-  unfold storageRead Batteries.RBMap.findD
-  rw [Batteries.RBMap.find?_insert_of_ne (t := storage) (k := slot) (v := value) (k' := slot') hcmp]
+  have hcmp : compare slot slot' ≠ .eq := by
+    simpa [compare_eq_iff_eq] using (Ne.symm hslot)
+  unfold storageRead
+  rw [Std.TreeMap.getD_insert, if_neg hcmp]
 
 /--
 `Account.updateStorage` branches on `value == 0`, so the nonzero case is expressed with the same boolean
@@ -112,18 +110,12 @@ guard that EVMYulLean uses internally.
 theorem lookupStorage_updateStorage_same_of_nonzero {τ} (acc : Account τ) (slot value : UInt256)
     (hvalue : (value == default) = false) :
     (acc.updateStorage slot value).lookupStorage slot = value := by
-  simp [Account.updateStorage, Account.lookupStorage, Batteries.RBMap.findD, hvalue]
-  rw [Batteries.RBMap.find?_insert_of_eq (t := acc.storage) (k := slot) (v := value) (k' := slot)]
-  · simp
-  · simp
+  simp [Account.updateStorage, Account.lookupStorage, hvalue]
 
 theorem lookupStorage_updateStorage_of_ne_of_nonzero {τ} (acc : Account τ)
     (slot slot' value : UInt256) (hvalue : (value == default) = false) (hslot : slot' ≠ slot) :
     (acc.updateStorage slot value).lookupStorage slot' = acc.lookupStorage slot' := by
-  have hcmp : compare slot' slot ≠ .eq := by
-    simpa [compare_eq_iff_eq] using hslot
-  simp [Account.updateStorage, Account.lookupStorage, Batteries.RBMap.findD, hvalue]
-  rw [Batteries.RBMap.find?_insert_of_ne (t := acc.storage) (k := slot) (v := value) (k' := slot') hcmp]
+  simp [Account.updateStorage, Account.lookupStorage, hvalue, Std.TreeMap.getD_insert, Ne.symm hslot]
 
 theorem refinesScalar_updateStorage_same_of_nonzero {τ} {acc : Account τ} {slot value : UInt256}
     (hvalue : (value == default) = false) :

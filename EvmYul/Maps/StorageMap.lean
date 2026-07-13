@@ -17,11 +17,8 @@ a'la `Finmap`.
 TODO - All of this is very ugly.
 -/
 
-import Batteries.Data.RBMap.Basic
-import Batteries.Data.RBMap.Depth
-import Batteries.Data.RBMap.Lemmas
-import Batteries.Data.RBMap.Alter
-import Batteries.Data.RBMap.WF
+import Std.Data.TreeMap.Basic
+import Std.Data.TreeMap.Lemmas
 import Mathlib.Data.Multiset.Sort
 
 import EvmYul.Wheels
@@ -34,7 +31,7 @@ namespace EvmYul
 
 section RemoveLater
 
-abbrev Storage : Type := Batteries.RBMap UInt256 UInt256 compare
+abbrev Storage : Type := Std.TreeMap UInt256 UInt256 compare
 
 def Storage.toFinmap (self : Storage) : Finmap (λ _ : UInt256 ↦ UInt256) :=
   self.foldl (init := ∅) λ acc k v ↦ acc.insert (UInt256.ofNat k.1) v
@@ -48,7 +45,7 @@ def toBlobs (pair : UInt256 × UInt256) : Option (String × String) := do
   pure (EvmYul.toHex kec, EvmYul.toHex rlp)
 
 def computeTrieRoot (storage : Storage) : Option ByteArray :=
-  match Array.mapM toBlobs storage.1.toArray with
+  match Array.mapM toBlobs storage.toArray with
     | none => .none
     | some pairs => (ByteArray.ofBlob (blobComputeTrieRoot pairs)).toOption
 
