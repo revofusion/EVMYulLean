@@ -1,14 +1,19 @@
 module
 
-public import Batteries
-public meta import Batteries
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
+import Batteries
+meta import Batteries
 
 public import EvmYul.Maps.ByteMap
 public meta import EvmYul.Maps.ByteMap
 public import EvmYul.UInt256
 public meta import EvmYul.UInt256
-public import Batteries.Data.HashMap
-public meta import Batteries.Data.HashMap
+import Batteries.Data.HashMap
+meta import Batteries.Data.HashMap
 
 @[expose] public section
 

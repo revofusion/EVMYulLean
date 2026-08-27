@@ -23,8 +23,8 @@ public import Std.Data.TreeMap.Basic
 public meta import Std.Data.TreeMap.Basic
 public import Std.Data.TreeMap.Lemmas
 public meta import Std.Data.TreeMap.Lemmas
-public import Mathlib.Data.Multiset.Sort
-public meta import Mathlib.Data.Multiset.Sort
+import Mathlib.Data.Multiset.Sort
+meta import Mathlib.Data.Multiset.Sort
 
 public import EvmYul.Wheels
 public meta import EvmYul.Wheels

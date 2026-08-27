@@ -1,5 +1,13 @@
 module
 
+public import Mathlib.Order.Defs.Unbundled
+public meta import Mathlib.Order.Defs.Unbundled
+
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import Lean.Data.Json
 public meta import Lean.Data.Json
 public import EvmYul.UInt256

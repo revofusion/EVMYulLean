@@ -1,11 +1,16 @@
 module
 
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import Std.Data.TreeSet.Basic
 public meta import Std.Data.TreeSet.Basic
 public import Std.Data.TreeSet.Lemmas
 public meta import Std.Data.TreeSet.Lemmas
-public import Mathlib.Data.Finset.Basic
-public meta import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Finset.Basic
+meta import Mathlib.Data.Finset.Basic
 
 public import EvmYul.State.ExecutionEnv
 public meta import EvmYul.State.ExecutionEnv

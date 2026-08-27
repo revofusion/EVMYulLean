@@ -1,7 +1,14 @@
 module
 
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import Mathlib.Data.String.Defs
 public meta import Mathlib.Data.String.Defs
+import Mathlib.Data.String.Defs
+meta import Mathlib.Data.String.Defs
 public import EvmYul.UInt256
 public meta import EvmYul.UInt256
 public import Mathlib.Data.Finmap
@@ -192,7 +199,7 @@ def getBlob? (s : String) : Except String Blob :=
 
 def getBlob! (s : String) : Blob := getBlob? s |>.toOption.get!
 
-def ByteArray.ofBlob (self : Blob) : Except String ByteArray := do
+@[no_expose] def ByteArray.ofBlob (self : Blob) : Except String ByteArray := do
   let chunks ← self.toList.toChunks 2 |>.mapM ofHex?
   pure ⟨chunks.toArray⟩
 

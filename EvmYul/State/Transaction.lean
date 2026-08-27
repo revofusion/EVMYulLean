@@ -1,7 +1,12 @@
 module
 
-public import Mathlib.Data.List.AList
-public meta import Mathlib.Data.List.AList
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
+import Mathlib.Data.List.AList
+meta import Mathlib.Data.List.AList
 
 public import EvmYul.UInt256
 public meta import EvmYul.UInt256

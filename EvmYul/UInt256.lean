@@ -1,29 +1,36 @@
 module
 
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import Init.Data.Nat.Div
 public meta import Init.Data.Nat.Div
-public import Mathlib.Data.Nat.Basic
-public meta import Mathlib.Data.Nat.Basic
-public import Mathlib.Data.Fin.Basic
-public meta import Mathlib.Data.Fin.Basic
-public import Mathlib.Data.Vector.Basic
-public meta import Mathlib.Data.Vector.Basic
-public import Mathlib.Algebra.Group.Defs
-public meta import Mathlib.Algebra.Group.Defs
-public import Mathlib.Algebra.GroupWithZero.Defs
-public meta import Mathlib.Algebra.GroupWithZero.Defs
-public import Mathlib.Algebra.Ring.Basic
-public meta import Mathlib.Algebra.Ring.Basic
-public import Mathlib.Algebra.Order.Floor.Defs
-public meta import Mathlib.Algebra.Order.Floor.Defs
-public import Mathlib.Algebra.Order.Floor.Ring
-public meta import Mathlib.Algebra.Order.Floor.Ring
-public import Mathlib.Algebra.Order.Floor.Semiring
-public meta import Mathlib.Algebra.Order.Floor.Semiring
-public import Mathlib.Data.ZMod.Defs
-public meta import Mathlib.Data.ZMod.Defs
-public import Mathlib.Tactic.Ring
-public meta import Mathlib.Tactic.Ring
+public import Mathlib.Order.Defs.PartialOrder
+public meta import Mathlib.Order.Defs.PartialOrder
+import Mathlib.Data.Nat.Basic
+meta import Mathlib.Data.Nat.Basic
+import Mathlib.Data.Fin.Basic
+meta import Mathlib.Data.Fin.Basic
+import Mathlib.Data.Vector.Basic
+meta import Mathlib.Data.Vector.Basic
+import Mathlib.Algebra.Group.Defs
+meta import Mathlib.Algebra.Group.Defs
+import Mathlib.Algebra.GroupWithZero.Defs
+meta import Mathlib.Algebra.GroupWithZero.Defs
+import Mathlib.Algebra.Ring.Basic
+meta import Mathlib.Algebra.Ring.Basic
+import Mathlib.Algebra.Order.Floor.Defs
+meta import Mathlib.Algebra.Order.Floor.Defs
+import Mathlib.Algebra.Order.Floor.Ring
+meta import Mathlib.Algebra.Order.Floor.Ring
+import Mathlib.Algebra.Order.Floor.Semiring
+meta import Mathlib.Algebra.Order.Floor.Semiring
+import Mathlib.Data.ZMod.Defs
+meta import Mathlib.Data.ZMod.Defs
+import Mathlib.Tactic.Ring
+meta import Mathlib.Tactic.Ring
 
 @[expose] public section
 
@@ -193,11 +200,11 @@ instance : DecidableEq UInt256 := λ a b ↦
         contradiction
       exact isFalse neq
 
-def decLt (a b : UInt256) : Decidable (a < b) :=
+@[no_expose] def decLt (a b : UInt256) : Decidable (a < b) :=
   match a, b with
     | n, m => inferInstanceAs (Decidable (n < m))
 
-def decLe (a b : UInt256) : Decidable (a ≤ b) :=
+@[no_expose] def decLe (a b : UInt256) : Decidable (a ≤ b) :=
   match a, b with
     | n, m => inferInstanceAs (Decidable (n <= m))
 

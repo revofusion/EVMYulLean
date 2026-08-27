@@ -1,5 +1,10 @@
 module
 
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import EvmYul.Wheels
 public meta import EvmYul.Wheels
 public import EvmYul.UInt256

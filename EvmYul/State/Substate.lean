@@ -1,5 +1,10 @@
 module
 
+import Mathlib.Data.Nat.Notation
+meta import Mathlib.Data.Nat.Notation
+import Mathlib.Data.Int.Notation
+meta import Mathlib.Data.Int.Notation
+
 public import Std.Data.TreeSet.Basic
 public meta import Std.Data.TreeSet.Basic
 public import Std.Data.TreeSet.Lemmas

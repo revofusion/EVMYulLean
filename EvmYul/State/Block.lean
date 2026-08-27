@@ -1,7 +1,7 @@
 module
 
-public import Mathlib.Data.Finset.Basic
-public meta import Mathlib.Data.Finset.Basic
+import Mathlib.Data.Finset.Basic
+meta import Mathlib.Data.Finset.Basic
 
 public import EvmYul.State.BlockHeader
 public meta import EvmYul.State.BlockHeader
