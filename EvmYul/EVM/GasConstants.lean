@@ -1,4 +1,9 @@
-import EvmYul.UInt256
+module
+
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+
+@[expose] public section
 
 namespace GasConstants
 

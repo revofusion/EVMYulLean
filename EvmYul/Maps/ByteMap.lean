@@ -17,10 +17,17 @@ a'la `Finmap`.
 TODO - All of this is very ugly.
 -/
 
-import Std.Data.TreeMap.Basic
-import Std.Data.TreeMap.Lemmas
+module
 
-import EvmYul.Wheels
+public import Std.Data.TreeMap.Basic
+public meta import Std.Data.TreeMap.Basic
+public import Std.Data.TreeMap.Lemmas
+public meta import Std.Data.TreeMap.Lemmas
+
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+@[expose] public section
 
 namespace EvmYul
 

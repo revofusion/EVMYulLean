@@ -1,18 +1,34 @@
-import Std.Data.TreeSet.Basic
-import Std.Data.TreeSet.Lemmas
-import Mathlib.Data.Finset.Basic
+module
 
-import EvmYul.State.ExecutionEnv
-import EvmYul.State.Substate
-import EvmYul.State.Account
-import EvmYul.State.Block
-import EvmYul.State.Substate
-import EvmYul.State.Transaction
+public import Std.Data.TreeSet.Basic
+public meta import Std.Data.TreeSet.Basic
+public import Std.Data.TreeSet.Lemmas
+public meta import Std.Data.TreeSet.Lemmas
+public import Mathlib.Data.Finset.Basic
+public meta import Mathlib.Data.Finset.Basic
 
-import EvmYul.Maps.AccountMap
+public import EvmYul.State.ExecutionEnv
+public meta import EvmYul.State.ExecutionEnv
+public import EvmYul.State.Substate
+public meta import EvmYul.State.Substate
+public import EvmYul.State.Account
+public meta import EvmYul.State.Account
+public import EvmYul.State.Block
+public meta import EvmYul.State.Block
+public import EvmYul.State.Substate
+public meta import EvmYul.State.Substate
+public import EvmYul.State.Transaction
+public meta import EvmYul.State.Transaction
 
-import EvmYul.UInt256
-import EvmYul.Wheels
+public import EvmYul.Maps.AccountMap
+public meta import EvmYul.Maps.AccountMap
+
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+@[expose] public section
 
 namespace EvmYul
 

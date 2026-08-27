@@ -1,5 +1,11 @@
-import EvmYul.PerformIO
-import EvmYul.Wheels
+module
+
+public import EvmYul.PerformIO
+public meta import EvmYul.PerformIO
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+@[expose] public section
 
 def blobComputeTrieRoot (ws : Array (String × String)) : String :=
   -- dbg_trace s!"called blobComputeTrieRoot with an array of size {ws.size}"

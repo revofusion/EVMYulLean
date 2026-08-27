@@ -1,15 +1,31 @@
-import Init.Data.Nat.Div
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Fin.Basic
-import Mathlib.Data.Vector.Basic
-import Mathlib.Algebra.Group.Defs
-import Mathlib.Algebra.GroupWithZero.Defs
-import Mathlib.Algebra.Ring.Basic
-import Mathlib.Algebra.Order.Floor.Defs
-import Mathlib.Algebra.Order.Floor.Ring
-import Mathlib.Algebra.Order.Floor.Semiring
-import Mathlib.Data.ZMod.Defs
-import Mathlib.Tactic.Ring
+module
+
+public import Init.Data.Nat.Div
+public meta import Init.Data.Nat.Div
+public import Mathlib.Data.Nat.Basic
+public meta import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Fin.Basic
+public meta import Mathlib.Data.Fin.Basic
+public import Mathlib.Data.Vector.Basic
+public meta import Mathlib.Data.Vector.Basic
+public import Mathlib.Algebra.Group.Defs
+public meta import Mathlib.Algebra.Group.Defs
+public import Mathlib.Algebra.GroupWithZero.Defs
+public meta import Mathlib.Algebra.GroupWithZero.Defs
+public import Mathlib.Algebra.Ring.Basic
+public meta import Mathlib.Algebra.Ring.Basic
+public import Mathlib.Algebra.Order.Floor.Defs
+public meta import Mathlib.Algebra.Order.Floor.Defs
+public import Mathlib.Algebra.Order.Floor.Ring
+public meta import Mathlib.Algebra.Order.Floor.Ring
+public import Mathlib.Algebra.Order.Floor.Semiring
+public meta import Mathlib.Algebra.Order.Floor.Semiring
+public import Mathlib.Data.ZMod.Defs
+public meta import Mathlib.Data.ZMod.Defs
+public import Mathlib.Tactic.Ring
+public meta import Mathlib.Tactic.Ring
+
+@[expose] public section
 
 namespace EvmYul
 
@@ -152,7 +168,7 @@ def toSigned (i : ℤ) : UInt256 :=
 
 instance : Complement UInt256 := ⟨EvmYul.UInt256.complement⟩
 
-private def powAux (a : UInt256) (c : UInt256) : ℕ → UInt256
+def powAux (a : UInt256) (c : UInt256) : ℕ → UInt256
   | 0 => a
   | n@(k + 1) => if n % 2 == 1
                  then powAux (a * c) (c * c) (n / 2)
@@ -299,7 +315,7 @@ variable {bs : List UInt8}
          {n : ℕ}
 
 -- | A bound for the natural number value of a list of bytes.
-private lemma fromBytes'_le : fromBytes' bs < 2^(8 * bs.length) := by
+lemma fromBytes'_le : fromBytes' bs < 2^(8 * bs.length) := by
   induction bs with
   | nil => unfold fromBytes'; simp
   | cons b bs ih =>
@@ -313,13 +329,13 @@ private lemma fromBytes'_le : fromBytes' bs < 2^(8 * bs.length) := by
     linarith
 
 -- | The natural number value of a length 32 list of bytes is < 2^256.
-private lemma fromBytes'_UInt256_le (h : bs.length = 32) : fromBytes' bs < 2^256 := by
+lemma fromBytes'_UInt256_le (h : bs.length = 32) : fromBytes' bs < 2^256 := by
     have h' := @fromBytes'_le bs
     rw [h] at h'
     exact h'
 
 -- | Convert a natural number into a list of bytes.
-private def toBytes' : ℕ → List UInt8
+def toBytes' : ℕ → List UInt8
   | 0 => []
   | n@(.succ n') =>
     let byte : UInt8 := ⟨Nat.mod n UInt8.size, Nat.mod_lt _ (by linarith)⟩
@@ -332,7 +348,7 @@ private def toBytes' : ℕ → List UInt8
 def toBytesBigEndian : ℕ → List UInt8 := List.reverse ∘ toBytes'
 
 -- | If n < 2⁸ᵏ, then (toBytes' n).length ≤ k.
-private lemma toBytes'_le {k : ℕ} (h : n < 2 ^ (8 * k)) : (toBytes' n).length ≤ k := by
+lemma toBytes'_le {k : ℕ} (h : n < 2 ^ (8 * k)) : (toBytes' n).length ≤ k := by
   induction k generalizing n with
   | zero =>
     simp at h
@@ -349,10 +365,10 @@ private lemma toBytes'_le {k : ℕ} (h : n < 2 ^ (8 * k)) : (toBytes' n).length 
       linarith
 
 -- | If n < 2²⁵⁶, then (toBytes' n).length ≤ 32.
-private lemma toBytes'_UInt256_le (h : n < UInt256.size) : (toBytes' n).length ≤ 32 := toBytes'_le h
+lemma toBytes'_UInt256_le (h : n < UInt256.size) : (toBytes' n).length ≤ 32 := toBytes'_le h
 
 -- | Zero-pad a list of bytes up to some length, adding the zeroes on the right.
-private def zeroPadBytes (n : ℕ) (bs : List UInt8) : List UInt8 :=
+def zeroPadBytes (n : ℕ) (bs : List UInt8) : List UInt8 :=
   bs ++ (List.replicate (n - bs.length)) 0
 
 -- | The length of a `zeroPadBytes` call is its first argument.
@@ -362,7 +378,7 @@ lemma zeroPadBytes_len (h : bs.length ≤ n) : (zeroPadBytes n bs).length = n :=
 
 -- | Appending a bunch of zeroes to a little-endian list of bytes doesn't change its value.
 @[simp]
-private lemma extend_bytes_zero : fromBytes' (bs ++ List.replicate n 0) = fromBytes' bs := by
+lemma extend_bytes_zero : fromBytes' (bs ++ List.replicate n 0) = fromBytes' bs := by
   induction bs with
   | nil =>
     simp [fromBytes']
@@ -373,11 +389,11 @@ private lemma extend_bytes_zero : fromBytes' (bs ++ List.replicate n 0) = fromBy
 
 -- | The ℕ value of a little-endian list of bytes is invariant under right zero-padding up to length 32.
 @[simp]
-private lemma fromBytes'_zeroPadBytes_32_eq : fromBytes' (zeroPadBytes 32 bs) = fromBytes' bs := extend_bytes_zero
+lemma fromBytes'_zeroPadBytes_32_eq : fromBytes' (zeroPadBytes 32 bs) = fromBytes' bs := extend_bytes_zero
 
 -- | Casting a natural number to a list of bytes and back is the identity.
 @[simp]
-private lemma fromBytes'_toBytes' {x : ℕ} : fromBytes' (toBytes' x) = x := by
+lemma fromBytes'_toBytes' {x : ℕ} : fromBytes' (toBytes' x) = x := by
   match x with
   | .zero => simp [toBytes', fromBytes']
   | .succ n =>
@@ -390,7 +406,7 @@ private lemma fromBytes'_toBytes' {x : ℕ} : fromBytes' (toBytes' x) = x := by
 
 def fromBytes! (bs : List UInt8) : ℕ := fromBytes' (bs.take 32)
 
-private lemma fromBytes_was_good_all_year_long
+lemma fromBytes_was_good_all_year_long
   (h : bs.length ≤ 32) : fromBytes' bs < 2^256 := by
   have h' := @fromBytes'_le bs
   rw [pow_mul] at h'

@@ -1,8 +1,17 @@
-import Std.Data.TreeSet.Basic
-import Std.Data.TreeSet.Lemmas
-import EvmYul.UInt256
-import EvmYul.Wheels
-import EvmYul.State.Account
+module
+
+public import Std.Data.TreeSet.Basic
+public meta import Std.Data.TreeSet.Basic
+public import Std.Data.TreeSet.Lemmas
+public meta import Std.Data.TreeSet.Lemmas
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import EvmYul.State.Account
+public meta import EvmYul.State.Account
+
+@[expose] public section
 
 namespace EvmYul
 

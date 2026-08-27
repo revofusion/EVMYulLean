@@ -1,5 +1,11 @@
-import EvmYul.Wheels
-import EvmYul.Maps.AccountMap
+module
+
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import EvmYul.Maps.AccountMap
+public meta import EvmYul.Maps.AccountMap
+
+@[expose] public section
 namespace EvmYul
 
 namespace EVM

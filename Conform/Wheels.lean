@@ -1,10 +1,20 @@
-import Lean.Data.Json
-import EvmYul.UInt256
-import EvmYul.Wheels
-import Std.Data.TreeMap.Basic
-import Std.Data.TreeMap.Lemmas
+module
 
-import Mathlib.Data.Multiset.Sort
+public import Lean.Data.Json
+public meta import Lean.Data.Json
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import Std.Data.TreeMap.Basic
+public meta import Std.Data.TreeMap.Basic
+public import Std.Data.TreeMap.Lemmas
+public meta import Std.Data.TreeMap.Lemmas
+
+public import Mathlib.Data.Multiset.Sort
+public meta import Mathlib.Data.Multiset.Sort
+
+@[expose] public section
 
 namespace Lean.Json
 

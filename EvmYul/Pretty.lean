@@ -6,9 +6,15 @@ The function for pretty printing is always `<Datatype>.pretty (self : Datatype) 
 modulo parametricity.
 -/
 
-import EvmYul.Operations
+module
 
-import Conform.Wheels
+public import EvmYul.Operations
+public meta import EvmYul.Operations
+
+public import Conform.Wheels
+public meta import Conform.Wheels
+
+@[expose] public section
 
 namespace EvmYul
 

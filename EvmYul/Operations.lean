@@ -1,7 +1,14 @@
-import EvmYul.UInt256
-import EvmYul.MachineState
+module
 
-import Mathlib.Data.Finmap
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.MachineState
+public meta import EvmYul.MachineState
+
+public import Mathlib.Data.Finmap
+public meta import Mathlib.Data.Finmap
+
+@[expose] public section
 
 namespace EvmYul
 

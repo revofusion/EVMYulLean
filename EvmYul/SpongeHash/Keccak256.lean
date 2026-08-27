@@ -1,3 +1,6 @@
+module
+
+@[expose] public section
 /-
   Switch to our Cryptographic repository once open sourced for equational version.
 

@@ -17,15 +17,26 @@ a'la `Finmap`.
 TODO - All of this is very ugly.
 -/
 
-import Std.Data.TreeMap.Basic
-import Std.Data.TreeMap.Lemmas
-import Mathlib.Data.Multiset.Sort
+module
 
-import EvmYul.Wheels
-import EvmYul.State.TrieRoot
-import EvmYul.SpongeHash.Keccak256
+public import Std.Data.TreeMap.Basic
+public meta import Std.Data.TreeMap.Basic
+public import Std.Data.TreeMap.Lemmas
+public meta import Std.Data.TreeMap.Lemmas
+public import Mathlib.Data.Multiset.Sort
+public meta import Mathlib.Data.Multiset.Sort
 
-import EvmYul.FFI.ffi
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import EvmYul.State.TrieRoot
+public meta import EvmYul.State.TrieRoot
+public import EvmYul.SpongeHash.Keccak256
+public meta import EvmYul.SpongeHash.Keccak256
+
+public import EvmYul.FFI.ffi
+public meta import EvmYul.FFI.ffi
+
+@[expose] public section
 
 namespace EvmYul
 

@@ -1,4 +1,9 @@
-import EvmYul.State.Substate
+module
+
+public import EvmYul.State.Substate
+public meta import EvmYul.State.Substate
+
+@[expose] public section
 
 namespace EvmYul
 

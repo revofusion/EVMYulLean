@@ -2,9 +2,16 @@
 https://docs.soliditylang.org/en/v0.8.9/yul.html
 -/
 
-import EvmYul.UInt256
-import EvmYul.Operations
-import EvmYul.Wheels
+module
+
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Operations
+public meta import EvmYul.Operations
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+@[expose] public section
 
 namespace EvmYul
 

@@ -1,8 +1,16 @@
-import Batteries
+module
 
-import EvmYul.Maps.ByteMap
-import EvmYul.UInt256
-import Batteries.Data.HashMap
+public import Batteries
+public meta import Batteries
+
+public import EvmYul.Maps.ByteMap
+public meta import EvmYul.Maps.ByteMap
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import Batteries.Data.HashMap
+public meta import Batteries.Data.HashMap
+
+@[expose] public section
 
 namespace EvmYul
 

@@ -1,10 +1,20 @@
-import Mathlib.Data.List.AList
+module
 
-import EvmYul.UInt256
-import EvmYul.Wheels
-import EvmYul.State.TrieRoot
-import Conform.Wheels
-import EvmYul.State.Substate
+public import Mathlib.Data.List.AList
+public meta import Mathlib.Data.List.AList
+
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import EvmYul.State.TrieRoot
+public meta import EvmYul.State.TrieRoot
+public import Conform.Wheels
+public meta import Conform.Wheels
+public import EvmYul.State.Substate
+public meta import EvmYul.State.Substate
+
+@[expose] public section
 
 namespace EvmYul
 

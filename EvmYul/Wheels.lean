@@ -1,6 +1,15 @@
-import EvmYul.UInt256
-import Mathlib.Data.Finmap
-import EvmYul.FFI.ffi
+module
+
+public import Mathlib.Data.String.Defs
+public meta import Mathlib.Data.String.Defs
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import Mathlib.Data.Finmap
+public meta import Mathlib.Data.Finmap
+public import EvmYul.FFI.ffi
+public meta import EvmYul.FFI.ffi
+
+@[expose] public section
 
 -- (195)
 def BE : ℕ → ByteArray := List.toByteArray ∘ EvmYul.toBytesBigEndian
@@ -200,7 +209,7 @@ def ByteArray.readWithoutPadding (source : ByteArray) (addr len : ℕ) : ByteArr
     let len := min len source.size
     source.extract addr (addr + len)
 
-private def inf := 2^66
+def inf := 2^66
 
 def ByteArray.readWithPadding (source : ByteArray) (addr len : ℕ) : ByteArray :=
   if len ≥ 2^64 then
@@ -302,7 +311,7 @@ partial def deserializeRLP (rlp : ByteArray) : Option 𝕋 := do
       let l ← list.mapM deserializeRLP
       some (.𝕃 l)
 
-private def R_b (x : ByteArray) : Option ByteArray :=
+def R_b (x : ByteArray) : Option ByteArray :=
   if x.size = 1 ∧ x.get! 0 < 128 then some x
   else
     if x.size < 56 then some <| [⟨128 + x.size⟩].toByteArray ++ x
@@ -314,7 +323,7 @@ private def R_b (x : ByteArray) : Option ByteArray :=
 
 mutual
 
-private def s (l : List 𝕋) : Option ByteArray :=
+def s (l : List 𝕋) : Option ByteArray :=
   match l with
     | [] => some .empty
     | t :: ts =>

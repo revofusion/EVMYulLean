@@ -1,8 +1,15 @@
-import EvmYul.State.Account
+module
 
-import EvmYul.Maps.StorageMap
+public import EvmYul.State.Account
+public meta import EvmYul.State.Account
 
-import EvmYul.Pretty
+public import EvmYul.Maps.StorageMap
+public meta import EvmYul.Maps.StorageMap
+
+public import EvmYul.Pretty
+public meta import EvmYul.Pretty
+
+@[expose] public section
 
 namespace EvmYul
 

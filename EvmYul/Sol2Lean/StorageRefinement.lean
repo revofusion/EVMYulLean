@@ -1,8 +1,16 @@
-import Std.Data.TreeMap.Lemmas
+module
 
-import EvmYul.FFI.ffi
-import EvmYul.State.AccountOps
-import EvmYul.StateOps
+public import Std.Data.TreeMap.Lemmas
+public meta import Std.Data.TreeMap.Lemmas
+
+public import EvmYul.FFI.ffi
+public meta import EvmYul.FFI.ffi
+public import EvmYul.State.AccountOps
+public meta import EvmYul.State.AccountOps
+public import EvmYul.StateOps
+public meta import EvmYul.StateOps
+
+@[expose] public section
 
 namespace EvmYul
 namespace Sol2Lean

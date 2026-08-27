@@ -1,5 +1,11 @@
-import EvmYul.UInt256
-import EvmYul.Wheels
+module
+
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+@[expose] public section
 
 namespace EvmYul
 

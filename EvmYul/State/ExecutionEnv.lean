@@ -1,7 +1,15 @@
-import EvmYul.Wheels
-import EvmYul.UInt256
-import EvmYul.State.BlockHeader
-import EvmYul.Yul.Ast
+module
+
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.State.BlockHeader
+public meta import EvmYul.State.BlockHeader
+public import EvmYul.Yul.Ast
+public meta import EvmYul.Yul.Ast
+
+@[expose] public section
 
 namespace EvmYul
 

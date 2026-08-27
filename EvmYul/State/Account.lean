@@ -1,12 +1,22 @@
-import Std.Data.TreeSet.Basic
+module
 
-import EvmYul.Maps.StorageMap
-import EvmYul.SpongeHash.Keccak256
+public import Std.Data.TreeSet.Basic
+public meta import Std.Data.TreeSet.Basic
 
-import EvmYul.UInt256
-import EvmYul.Wheels
+public import EvmYul.Maps.StorageMap
+public meta import EvmYul.Maps.StorageMap
+public import EvmYul.SpongeHash.Keccak256
+public meta import EvmYul.SpongeHash.Keccak256
 
-import EvmYul.Yul.Ast
+public import EvmYul.UInt256
+public meta import EvmYul.UInt256
+public import EvmYul.Wheels
+public meta import EvmYul.Wheels
+
+public import EvmYul.Yul.Ast
+public meta import EvmYul.Yul.Ast
+
+@[expose] public section
 
 namespace EvmYul
 

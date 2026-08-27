@@ -1,8 +1,16 @@
-import Mathlib.Data.Finset.Basic
+module
 
-import EvmYul.State.BlockHeader
-import EvmYul.State.Transaction
-import EvmYul.State.Withdrawal
+public import Mathlib.Data.Finset.Basic
+public meta import Mathlib.Data.Finset.Basic
+
+public import EvmYul.State.BlockHeader
+public meta import EvmYul.State.BlockHeader
+public import EvmYul.State.Transaction
+public meta import EvmYul.State.Transaction
+public import EvmYul.State.Withdrawal
+public meta import EvmYul.State.Withdrawal
+
+@[expose] public section
 
 namespace EvmYul
 
